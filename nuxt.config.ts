@@ -3,5 +3,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui'],
-  baseURL:  '/scene-test/'
+  app: {
+     baseURL:  '/scene-test/'
+  }
+
 })
