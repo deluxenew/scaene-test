@@ -3,7 +3,5 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxt/image', '@nuxt/ui'],
-  app: {
-    baseURL: '/scene-test/'
-  }
+ baseURL: process.env.NODE_ENV === 'production' ? '/scene-test/' : '/'
 })
