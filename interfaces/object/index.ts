@@ -1,4 +1,4 @@
-import {Mesh} from "three";
+import {BoxGeometry, Mesh} from "three";
 import type * as OBJ from "./types";
 import type {BoxConfig} from "../geometry/types";
 import type {Config as MaterialConfig, MaterialItem} from "../material/types";
@@ -43,6 +43,10 @@ export class ObjInterface {
 
         const obj = new Mesh(geometry, material);
 
+        obj.castShadow = true;
+        obj.receiveShadow = true;
+        obj.name = objConfig.name;
+        obj.userData.interface = this
         // Не вызываем dispose() здесь, так как меш использует эти ресурсы
         // Вместо этого можно сохранить ссылки для последующего освобождения
         obj.userData.config = objConfig;
@@ -52,20 +56,27 @@ export class ObjInterface {
             geometry.dispose();
         };
 
-        this.setPosition(obj)
+        this.setPosition(obj, this.objConfig)
         this.setRotation(obj)
 
         return obj;
     }
 
-    setPosition(obj: Mesh) {
-        const {position: {x = 0, y = 0, z = 0} = {}} = this.objConfig;
+    setPosition(obj: Mesh, config: OBJ.Config) {
+        const {position: {x = 0, y = 0, z = 0} = {}} = config ;
         obj.position.set(x, y, z)
     }
 
     setRotation(obj: Mesh) {
-        const {rotation: {x = 0, y = 0, z = 0} = {}} = this.objConfig;
+        const {rotation: {x = 0, y = 0, z = 0} = {}} =  this.objConfig;
         obj.rotation.set(x, y, z)
+    }
+
+    updateGeometry(obj: Mesh, objConfig: OBJ.Config) {
+        const {width, height, depth} = objConfig.geometryConfig;
+        obj.geometry = new BoxGeometry(width, height, depth)
+        obj.updateMatrix()
+        this.setPosition(obj, objConfig)
     }
 
     // Пример реализации метода для анимации

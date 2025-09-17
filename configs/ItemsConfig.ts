@@ -14,9 +14,52 @@ const itemsConfig: Config[] = [
             color: Color.WHITE,
         },
         position: {
-            x: 3.5,
+            x: 4.5,
             y: 10,
-            z: 0.25,
+            z: 4.25,
+        },
+        rotation: {
+            x: 0,
+            y: Math.PI / 6,
+            z: 0,
+        }
+    },
+    {
+        name: 'box',
+        geometryConfig: {
+            width: 8,
+            height: 8,
+            depth: 8
+        },
+        materialConfig: {
+            type: Types.STANDARD,
+            color: Color.GREEN,
+        },
+        position: {
+            x: 4,
+            y: 4,
+            z: 15,
+        },
+        rotation: {
+            x: 0,
+            y: 0,
+            z: 0,
+        }
+    },
+
+    {
+        name: 'sphere',
+        geometryConfig: {
+            radius: 4,
+        },
+        materialConfig: {
+            type: Types.STANDARD,
+            color: Color.BLUE,
+        },
+        position: {
+            x: 17,
+            y: 4,
+            z: 4,
         },
         rotation: {
             x: 0,

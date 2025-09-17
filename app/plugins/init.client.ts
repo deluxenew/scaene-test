@@ -4,13 +4,15 @@ import CameraConfig from "~~/configs/CameraConfig";
 import {CameraInterface} from "~~/interfaces/camera";
 import {AnimationControlledRenderer} from "~~/interfaces/animation";
 import {SceneInterface} from "~~/interfaces/scene";
+import {PCFSoftShadowMap} from "three";
 
 export default defineNuxtPlugin({
     name: 'my-plugin',
     enforce: 'pre',
     async setup () {
         const renderer = new THREE.WebGLRenderer({antialias: true, depth: true});
-
+        renderer.shadowMap.enabled = true
+        renderer.shadowMap.type = PCFSoftShadowMap
         setRendererSize()
 
         const cameraConfig = CameraConfig({width: window.innerWidth, height: window.innerHeight})

@@ -203,7 +203,7 @@ export class CameraInterface {
         const cameraParams = calculateCameraPosition(
             window.innerWidth,
             window.innerHeight,
-            5,
+            10,
             2,
             3,
             20
@@ -214,10 +214,10 @@ export class CameraInterface {
 
 
     public setCameraLeft() {
-        this.setMoveCamera(new THREE.Vector3(1, 5, 15), new THREE.Vector3(20, 5, 20))
+        this.setMoveCamera(new THREE.Vector3(4, 4, 15), new THREE.Vector3(20, 10, 20))
     }
 
     public setCameraRight() {
-        this.setMoveCamera(new THREE.Vector3(15, 5, 1), new THREE.Vector3(10, 5, 20))
+        this.setMoveCamera(new THREE.Vector3(17, 4, 4), new THREE.Vector3(17, 10, 20))
     }
 }

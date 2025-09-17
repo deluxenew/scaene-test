@@ -8,6 +8,8 @@ export enum Types {
 
 export enum Color {
     WHITE = '#ffffff',
+    GREEN = '#00ff00',
+    BLUE = '#0000ff',
 }
 
 
