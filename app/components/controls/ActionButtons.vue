@@ -59,9 +59,10 @@ const updateDebounce = useDebounceFn(() => setNewGeometry(height.value), 500)
 
 <style lang="scss">
 .controls {
+  width: 100%;
+  margin: 0 auto;
   position: absolute;
-  left: 16px;
-  top: 16px;
+  bottom: 16px;
   display: flex;
   gap: 16px;
   justify-content: space-between;
@@ -76,8 +77,8 @@ const updateDebounce = useDebounceFn(() => setNewGeometry(height.value), 500)
 }
 
 .input_field {
+  width: 100%;
   position: absolute;
-  right: 16px;
   top: 16px;
   display: flex;
   justify-content: center;
