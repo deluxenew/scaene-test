@@ -1,10 +1,10 @@
 import {Mesh} from "three";
 import type * as OBJ from "./types";
 import type {BoxConfig} from "../geometry/types";
-import type { Config as MaterialConfig, MaterialItem } from "../material/types";
+import type {Config as MaterialConfig, MaterialItem} from "../material/types";
 
-import { GeometryInterface } from "../geometry";
-import { MaterialInterface } from "../material";
+import {GeometryInterface} from "../geometry";
+import {MaterialInterface} from "../material";
 
 export class ObjInterface {
     constructor(public objConfig: OBJ.Config) {
@@ -52,7 +52,20 @@ export class ObjInterface {
             geometry.dispose();
         };
 
+        this.setPosition(obj)
+        this.setRotation(obj)
+
         return obj;
+    }
+
+    setPosition(obj: Mesh) {
+        const {position: {x = 0, y = 0, z = 0} = {}} = this.objConfig;
+        obj.position.set(x, y, z)
+    }
+
+    setRotation(obj: Mesh) {
+        const {rotation: {x = 0, y = 0, z = 0} = {}} = this.objConfig;
+        obj.rotation.set(x, y, z)
     }
 
     // Пример реализации метода для анимации

@@ -204,9 +204,9 @@ export class CameraInterface {
             window.innerWidth,
             window.innerHeight,
             5,
-            5,
-            15,
-            5
+            2,
+            3,
+            20
         );
 
         this.setMoveCamera(cameraParams.target, cameraParams.position)
@@ -214,10 +214,10 @@ export class CameraInterface {
 
 
     public setCameraLeft() {
-        this.setMoveCamera(new THREE.Vector3(1, 1, 1), new THREE.Vector3(10, 5, 10))
+        this.setMoveCamera(new THREE.Vector3(1, 5, 15), new THREE.Vector3(20, 5, 20))
     }
 
     public setCameraRight() {
-        this.setMoveCamera(new THREE.Vector3(1, 1, 1), new THREE.Vector3(10, 5, 10))
+        this.setMoveCamera(new THREE.Vector3(15, 5, 1), new THREE.Vector3(10, 5, 20))
     }
 }

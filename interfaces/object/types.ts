@@ -5,4 +5,14 @@ export interface Config {
     name: string;
     geometryConfig: GeometryConfig
     materialConfig: MaterialConfig
+    position: {
+        x: number;
+        y: number;
+        z: number;
+    }
+    rotation: {
+        x: number;
+        y: number;
+        z: number;
+    }
 }

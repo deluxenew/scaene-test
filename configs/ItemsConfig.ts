@@ -12,6 +12,16 @@ const itemsConfig: Config[] = [
         materialConfig: {
             type: Types.STANDARD,
             color: Color.WHITE,
+        },
+        position: {
+            x: 3.5,
+            y: 10,
+            z: 0.25,
+        },
+        rotation: {
+            x: 0,
+            y: 0,
+            z: 0,
         }
     },
 ]
