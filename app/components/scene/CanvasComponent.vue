@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const sceneRef = ref<HTMLElement | null>(null)
-const {renderer, sceneInterface}  = useNuxtApp().$api
+const {renderer}  = useNuxtApp().$api
 
 onMounted(() => {
   sceneRef.value?.appendChild(renderer.domElement);
 })
 
-sceneInterface.buildScene()
+
 </script>
 
 <template>

@@ -5,6 +5,8 @@ import type {Config as MaterialConfig, MaterialItem} from "../material/types";
 
 import {GeometryInterface} from "../geometry";
 import {MaterialInterface} from "../material";
+import type {TextureConfig} from "~~/interfaces/textureMaterial/types";
+import TextureMaterial from "~~/interfaces/textureMaterial";
 
 export class ObjInterface {
     constructor(public objConfig: OBJ.Config) {
@@ -13,8 +15,8 @@ export class ObjInterface {
         }
     }
 
-    get objItem(): Mesh {
-        return this.createObjItem(this.objConfig);
+    async objItem(): Promise<Mesh> {
+        return await this.createObjItem(this.objConfig);
     }
 
     private createGeometry(geometryConfig: BoxConfig) {
@@ -25,22 +27,26 @@ export class ObjInterface {
         return geometryInterface.geometry;
     }
 
-    private createMaterial(materialConfig: MaterialConfig): MaterialItem {
+    private async createMaterial(materialConfig: MaterialConfig | TextureConfig): Promise<MaterialItem> {
         if (!materialConfig) {
             throw new Error("MaterialConfig is required");
         }
-        const materialInstance = new MaterialInterface(materialConfig);
+        if ((materialConfig as TextureConfig).texturePath) {
+            const materialInstance = new TextureMaterial(materialConfig as TextureConfig)
+            return await materialInstance.getMeshStandardMaterial()
+        }
+        const materialInstance = new MaterialInterface(materialConfig as MaterialConfig);
         return materialInstance.material;
     }
 
-    private createObjItem(objConfig: OBJ.Config): Mesh {
+    public async createObjItem(objConfig: OBJ.Config): Promise<Mesh> {
         if (!objConfig) {
             throw new Error("ObjConfig is required");
         }
 
-        const geometry = this.createGeometry(objConfig.geometryConfig);
-        const material = this.createMaterial(objConfig.materialConfig);
 
+        const geometry = this.createGeometry(objConfig.geometryConfig);
+        const material = await this.createMaterial(objConfig.materialConfig);
         const obj = new Mesh(geometry, material);
 
         obj.castShadow = true;
@@ -63,18 +69,19 @@ export class ObjInterface {
     }
 
     setPosition(obj: Mesh, config: OBJ.Config) {
-        const {position: {x = 0, y = 0, z = 0} = {}} = config ;
+        const {position: {x = 0, y = 0, z = 0} = {}} = config;
         obj.position.set(x, y, z)
     }
 
     setRotation(obj: Mesh) {
-        const {rotation: {x = 0, y = 0, z = 0} = {}} =  this.objConfig;
+        const {rotation: {x = 0, y = 0, z = 0} = {}} = this.objConfig;
         obj.rotation.set(x, y, z)
     }
 
-    updateGeometry(obj: Mesh, objConfig: OBJ.Config) {
+    async updateGeometry(obj: Mesh, objConfig: OBJ.Config) {
         const {width, height, depth} = objConfig.geometryConfig;
         obj.geometry = new BoxGeometry(width, height, depth)
+        obj.material = await this.createMaterial(objConfig.materialConfig)
         obj.updateMatrix()
         this.setPosition(obj, objConfig)
     }

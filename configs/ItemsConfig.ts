@@ -1,5 +1,6 @@
 import type {Config} from "../interfaces/object/types";
 import {Color, Types} from "../interfaces/material/types";
+import {TexturePaths} from "~~/interfaces/textureMaterial/types";
 
 const itemsConfig: Config[] = [
     {
@@ -10,8 +11,10 @@ const itemsConfig: Config[] = [
             depth: 0.5
         },
         materialConfig: {
-            type: Types.STANDARD,
+            texturePath: TexturePaths.WOOD,
             color: Color.WHITE,
+            textureHeight: 20,
+            textureWidth: 7
         },
         position: {
             x: 4.5,

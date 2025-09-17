@@ -46,7 +46,7 @@ export class SceneInterface {
         this.scene.add(this.directionalLight);
     }
 
-    buildScene() {
+    async buildScene() {
         // Очищаем сцену
         while (this.scene.children.length > 0) {
             if (this.scene.children[0]) this.scene.remove(this.scene.children[0]);
@@ -56,16 +56,16 @@ export class SceneInterface {
         const boxes = [];
         const doorConfig = itemsConfig('door');
         if (doorConfig) {
-            boxes.push(new ObjInterface(doorConfig).objItem);
+            boxes.push(await (new ObjInterface(doorConfig)).objItem());
         }
         const boxConfig = itemsConfig('box');
         if (boxConfig) {
-            boxes.push(new ObjInterface(boxConfig).objItem);
+            boxes.push(await (new ObjInterface(boxConfig)).objItem());
         }
 
         const sphereConfig = itemsConfig('sphere');
         if (sphereConfig) {
-            boxes.push(new ObjInterface(sphereConfig).objItem);
+            boxes.push(await (new ObjInterface(sphereConfig)).objItem());
         }
 
         boxes.forEach((box) => {
